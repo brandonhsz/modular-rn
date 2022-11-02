@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import init from 'react_native_mqtt';
+import { useStore } from '../store/store'
 import Paho from 'paho-mqtt';
 
 const useMQTT = () => {
@@ -19,9 +18,13 @@ const useMQTT = () => {
   const connect = () => {
     client.connect({
       onSuccess: () => {
-        console.log('connected');
+        console.log('connected to mqtt server');
         setConnectStatus(true);
         client.subscribe('sensores');
+        console.log('subscribed to topic');
+        client.onMessageArrived = (message) => {
+          console.log('message arrived', message.payloadString);
+        };
       },
       onFailure: () => {
         console.log('failed');
