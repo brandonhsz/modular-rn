@@ -31,7 +31,7 @@ export default function LoginScreen({ navigation }) {
     <Background>
       {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
-      <Header>Bienvenido</Header>
+      <Text style={styles.header}>Bienvenido</Text>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -90,5 +90,16 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
     color: theme.colors.primary,
+  },
+  header: {
+    fontSize: 21,
+    color: theme.colors.primary,
+    fontWeight: 'bold',
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: 'grey',
+    padding: 10,
+    height: 50,
+    paddingVertical: 12,
   },
 })
