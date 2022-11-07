@@ -4,6 +4,7 @@ import React from 'react'
 import Header from '../components/Header'
 
 import useMQTT from '../hooks/useMQTT'
+import { theme } from '../core/theme'
 
 import { useStore } from '../store/store'
 import PacientList from '../components/PacientList'
@@ -23,10 +24,6 @@ export default function Main({ navigation }) {
     >
       <Header>Bienvenido Doctor</Header>
       <PacientList />
-      <Button
-        title="Go to Patient"
-        onPress={() => navigation.navigate('Login')}
-      />
     </View>
   )
 }
@@ -34,10 +31,7 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 4,
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.surface,
     alignItems: 'center',
-    // justifyContent: 'center',
   },
-
-
 })

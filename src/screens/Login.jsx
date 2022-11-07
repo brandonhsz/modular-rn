@@ -3,11 +3,11 @@ import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
-import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
+import { Video, AVPlaybackStatus } from 'expo-av'
+import videoFondo from '../assets/todo/video-fondo.mp4'
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -30,8 +30,10 @@ export default function LoginScreen({ navigation }) {
   return (
     <Background>
       {/* <BackButton goBack={navigation.goBack} /> */}
-      <Logo />
-      <Text style={styles.header}>Bienvenido</Text>
+      <View>
+        <Logo />
+        <Text style={styles.header}>Bienvenido</Text>
+      </View>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -52,15 +54,16 @@ export default function LoginScreen({ navigation }) {
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
+
       />
       <View style={styles.forgotPassword}>
         <TouchableOpacity
           onPress={() => navigation.navigate('ResetPasswordScreen')}
         >
-          <Text style={styles.forgot}>Olvidaste tu contrase~na?</Text>
+          <Text style={styles.forgot}>Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={() => navigation.navigate('Main')}>
+      <Button style={styles.button} mode="contained" onPress={() => navigation.navigate('Main')}>
         Login
       </Button>
       <View style={styles.row}>
@@ -85,11 +88,12 @@ const styles = StyleSheet.create({
   },
   forgot: {
     fontSize: 13,
-    color: theme.colors.secondary,
+    color: 'black',
+
   },
   link: {
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    color: theme.colors.backdrop,
   },
   header: {
     fontSize: 21,
@@ -101,5 +105,13 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 50,
     paddingVertical: 12,
+    // alignSelf: 'center'
+    textAlign: 'center'
   },
+  button: {
+    backgroundColor: theme.colors.primary,
+  },
+  textInput: {
+    borderRadius: 10,
+  }
 })

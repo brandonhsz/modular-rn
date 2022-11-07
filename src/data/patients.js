@@ -35,4 +35,52 @@ export const patients = [
     room: 'Sala 1',
     status: true
   },
+  {
+    name: 'Saul',
+    lastName: 'Perez',
+    age: 20,
+    gender: 'Masculino',
+    doctor: 'Dr. Juan Perez',
+    blood: 'O+',
+    procedure: 'Cirugia de rodilla',
+    details: 'Cirugia de rodilla por fractura de menisco',
+    room: 'Sala 1',
+    status: true
+  },
+  {
+    name: 'David',
+    lastName: 'Perez',
+    age: 20,
+    gender: 'Masculino',
+    doctor: 'Dr. Juan Perez',
+    blood: 'O+',
+    procedure: 'Cirugia de rodilla',
+    details: 'Cirugia de rodilla por fractura de menisco',
+    room: 'Sala 1',
+    status: true
+  },
+  {
+    name: 'Martin',
+    lastName: 'Perez',
+    age: 20,
+    gender: 'Masculino',
+    doctor: 'Dr. Juan Perez',
+    blood: 'O+',
+    procedure: 'Cirugia de rodilla',
+    details: 'Cirugia de rodilla por fractura de menisco',
+    room: 'Sala 1',
+    status: true
+  },
+  {
+    name: 'Julio',
+    lastName: 'Perez',
+    age: 20,
+    gender: 'Masculino',
+    doctor: 'Dr. Juan Perez',
+    blood: 'O+',
+    procedure: 'Cirugia de rodilla',
+    details: 'Cirugia de rodilla por fractura de menisco',
+    room: 'Sala 1',
+    status: true
+  },
 ]

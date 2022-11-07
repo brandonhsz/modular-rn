@@ -1,68 +1,106 @@
-import { View, Text, FlatList, Button, StyleSheet, Image } from 'react-native'
+import { View, Text, FlatList, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { patients } from '../data/patients'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
+import LogoFemenino from '../assets/todo/am4.png'
+import LogoMasculino from '../assets/todo/ah5.png'
+import Button from './Button'
+import Sensors from './Sensors';
+import { theme } from '../core/theme';
+import SensorIcon from '../assets/todo/prescripcion-medica.png'
 
-import LogoFemenino from '../assets/femenino.png'
-import LogoMasculino from '../assets/masculino.png'
 
 export default function PacientList() {
+
+  const navigation = useNavigation()
+
   return (
-    <View style={styles.container}>
-      <Text>Los pacientes de hoy son: :</Text>
-      <FlatList
-        data={patients}
-        style={styles.list}
-        // numColumns={2}
-        renderItem={({ item }) => (
-          <View
-            style={styles.card}
-          >
-            {/* <Button
-              title={item.name}
-              onPress={() => navigation.navigate('Patient', { item })}
-            /> */}
-            <Image
-              style={styles.patientLogo}
+    <>
+      <Text style={styles.welcomeText}>Los pacientes de hoy son:</Text>
+      <ScrollView style={styles.container}>
+        <FlatList
+          data={patients}
+          renderItem={({ item }) => (
+            <View
+              style={styles.card}
+            >
+              <View style={styles.imageDirection}>
+                <Image
+                  style={styles.patientLogo}
 
-              source={item.gender === 'Femenino' ? LogoFemenino : LogoMasculino}
-            />
-            <Text style={styles.text}>{item.name}</Text>
+                  source={item.gender === 'Femenino' ? LogoFemenino : LogoMasculino}
+                />
+                <Text style={styles.text}>{item.name} {item.lastName}</Text>
+              </View>
 
-            <Text style={styles.text}>Aqui la info de sensores</Text>
-          </View>
-        )}
-      />
-    </View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Patient', { item: item })}
+              >
+                <View
+                  style={styles.container}
+                >
+                  <Image
+                    style={styles.icon}
+                    source={SensorIcon}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
+      </ScrollView>
+      <Button
+        mode={'contained'}
+        style={styles.button}
+        onPress={() => navigation.navigate('Add')}
+      >Añadir Paciente</Button>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-
     width: '90%',
   },
   text: {
     alignSelf: 'center',
   },
-  list: {
-    borderColor: 'black',
-    // borderWidth: 1,
-    // height: 'auto',
-  },
   card: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 10,
+    // backgroundColor: 'rgba(246, 51,65, 0.85)',
+    marginTop: 5,
     padding: 10,
     width: "100%",
-    borderBottomWidth: 1,
+    borderTopWidth: 1,
   },
   patientLogo: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     borderWidth: 1,
-    borderRadius: 50 / 2,
+    // borderRadius: '50%',
+    borderRadius: 60 / 2,
+    marginRight: 10,
     borderColor: 'rgb(0, 218, 227)',
+  },
+  imageDirection: {
+    flexDirection: 'row'
+  },
+  welcomeText: {
+    fontSize: 15,
+    fontWeight: '500',
+    width: '100%',
+    marginLeft: 40,
+    position: 'relative',
+    bottom: -20
+  },
+  button: {
+    backgroundColor: theme.colors.primary,
+    marginBottom: 20,
+  },
+  icon: {
+    height: 50,
+    width: 50,
   }
 })

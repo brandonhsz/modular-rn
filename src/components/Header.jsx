@@ -6,20 +6,20 @@ import { theme } from '../core/theme'
 export default function Header(props) {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.doctorLogo}
-        source={require('../assets/doctor.png')}
-      />
       <View>
         <Text style={styles.header} {...props} />
       </View>
+      <Image
+        style={styles.doctorLogo}
+        source={require('../assets/todo/dme.png')}
+      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    marginTop: 5,
     flexDirection: 'row',
   },
   header: {
@@ -32,13 +32,17 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 50,
     paddingVertical: 12,
+    position: 'relative',
+    top: 30,
+    right: 10
+    // width: "100%"
   },
   doctorLogo: {
     width: 100,
     height: 100,
     marginTop: 30,
-    borderWidth: 2,
+    // borderWidth: 2,
     borderColor: 'rgb(0, 218, 227)',
-    borderRadius: 100 / 2,
+    // borderRadius: 100 / 2,
   },
 })
