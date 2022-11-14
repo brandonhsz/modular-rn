@@ -5,15 +5,23 @@ import Paho from 'paho-mqtt';
 const useMQTT = () => {
 
   const [connectStatus, setConnectStatus] = useState(false);
-
+  const [data, setData] = useState({})
   const options = {
-    host: '192.168.100.10',
+    host: '172.20.10.2',
     port: 8083,
-    path: '/testTopic',
+    path: '/sensores',
     id: 'id_' + 'BrandonIphone'
   };
 
   const client = new Paho.Client(options.host, Number(options.port), options.id);
+
+  useEffect(() => {
+    connect()
+  }, [])
+
+  useEffect(() => {
+    console.log(`desde hook:${data}`)
+  }, [data])
 
   const connect = () => {
     client.connect({
@@ -24,6 +32,8 @@ const useMQTT = () => {
         console.log('subscribed to topic');
         client.onMessageArrived = (message) => {
           console.log('message arrived', message.payloadString);
+          setData(JSON.parse(message.payloadString))
+          console.log(data.temp);
         };
       },
       onFailure: () => {
@@ -42,6 +52,7 @@ const useMQTT = () => {
   return {
     client,
     connect,
+    data
   }
 }
 

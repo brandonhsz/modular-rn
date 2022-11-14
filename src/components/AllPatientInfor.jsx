@@ -2,17 +2,33 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { theme } from '../core/theme'
 
-export default function AllPatientInfor() {
+export default function AllPatientInfor({ patient }) {
+  const { name, lasName, age, gender, doctor, blood, procedure, details, room, status } = patient
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Nombre:</Text>
-      <Text style={styles.text}>Apellido: </Text>
-      <Text style={styles.text}>Edad: </Text>
-      <Text style={styles.text}>Tipo De Sangre:</Text>
-      <Text style={styles.text}>Medico: </Text>
-      <Text style={styles.text}>Procedimiento: </Text>
-      <Text style={styles.text}>Area: </Text>
-      <Text style={styles.text}>Brazalete: </Text>
+      <Text style={styles.text}>
+        Nombre:{name}
+      </Text>
+      <Text style={styles.text}>
+        Apellido:{lasName}</Text>
+      <Text style={styles.text}>
+        Edad:{age}
+      </Text>
+      <Text style={styles.text}>
+        Tipo De Sangre:{blood}
+      </Text>
+      <Text style={styles.text}>
+        Medico:{doctor}</Text>
+      <Text style={styles.text}>
+        Procedimiento:{procedure}
+      </Text>
+      <Text style={styles.text}>
+        Area:{room}
+      </Text>
+      <Text style={styles.text}>
+        Brazalete:{1}
+      </Text>
     </View>
   )
 }
@@ -31,5 +47,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
+
   }
 })

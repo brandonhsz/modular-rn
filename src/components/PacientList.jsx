@@ -8,18 +8,22 @@ import Button from './Button'
 import Sensors from './Sensors';
 import { theme } from '../core/theme';
 import SensorIcon from '../assets/todo/prescripcion-medica.png'
+import usePatients from '../hooks/usePatients';
 
 
 export default function PacientList() {
 
   const navigation = useNavigation()
+  const { patientsData } = usePatients()
+
+
 
   return (
     <>
       <Text style={styles.welcomeText}>Los pacientes de hoy son:</Text>
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <FlatList
-          data={patients}
+          data={patientsData}
           renderItem={({ item }) => (
             <View
               style={styles.card}
@@ -48,7 +52,7 @@ export default function PacientList() {
             </View>
           )}
         />
-      </ScrollView>
+      </View>
       <Button
         mode={'contained'}
         style={styles.button}

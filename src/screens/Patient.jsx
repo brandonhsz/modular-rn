@@ -5,19 +5,24 @@ import React from 'react'
 import { useStore } from '../store/store';
 import PatientInfo from '../components/PatientInfo';
 import AllPatientInfor from '../components/AllPatientInfor';
+import Map from '../components/Map';
 
 
 export default function Patient({ route, navigation }) {
-  console.log(route);
-  const { name, lastName, age, gender, doctor, blood, procedure, details, room, status } = route.params.item
-
+  console.log(route.params.item);
   const data = useStore(state => state.datos);
   return (
     <ScrollView
       style={styles.container}
     >
-      <PatientInfo />
-      <AllPatientInfor />
+      <PatientInfo
+        patient={route.params.item}
+      />
+      <AllPatientInfor
+        patient={route.params.item}
+      />
+
+      <Map />
     </ScrollView>
   )
 }

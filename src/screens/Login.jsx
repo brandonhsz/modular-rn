@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
@@ -6,41 +6,41 @@ import Logo from '../components/Logo'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import { theme } from '../core/theme'
-import { Video, AVPlaybackStatus } from 'expo-av'
-import videoFondo from '../assets/todo/video-fondo.mp4'
-
+import axios from 'axios'
+import Danger from '../components/Danger'
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState({ value: '', error: '' })
-  const [password, setPassword] = useState({ value: '', error: '' })
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState(false)
 
-  const onLoginPressed = () => {
-    const emailError = emailValidator(email.value)
-    const passwordError = passwordValidator(password.value)
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError })
-      setPassword({ ...password, error: passwordError })
-      return
-    }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
+  const onLoginPressed = async () => {
+    const response = await axios.post('http://172.20.10.2:3000/login', {
+      email: email,
+      password: password
     })
+    console.log(response.data.data.status);
+    if (response.data.data.status === 200) {
+      setError(false)
+      navigation.replace('Main')
+    }
+    else setError(true)
   }
+
 
   return (
     <Background>
-      {/* <BackButton goBack={navigation.goBack} /> */}
       <View>
         <Logo />
         <Text style={styles.header}>Bienvenido</Text>
       </View>
+      {
+        error ? <Danger message={'Verifique los datos ingresados'} style={styles.danger} /> : null
+      }
       <TextInput
         label="Email"
         returnKeyType="next"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
         autoCapitalize="none"
         autoCompleteType="email"
         textContentType="emailAddress"
@@ -49,10 +49,8 @@ export default function LoginScreen({ navigation }) {
       <TextInput
         label="Password"
         returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
         secureTextEntry
 
       />
@@ -63,15 +61,17 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.forgot}>Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
       </View>
-      <Button style={styles.button} mode="contained" onPress={() => navigation.navigate('Main')}>
+      <Button style={styles.button} mode="contained" onPress={() => onLoginPressed()}>
         Login
       </Button>
       <View style={styles.row}>
         <Text>No tienes una cuenta? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+        <TouchableOpacity onPress={() => { }}>
           <Text style={styles.link}>Crear Cuenta</Text>
         </TouchableOpacity>
       </View>
+
+
     </Background>
   )
 }
@@ -113,5 +113,9 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderRadius: 10,
+  },
+  danger: {
+    backgroundColor: theme.colors.danger,
+    borderWidth: 1
   }
 })

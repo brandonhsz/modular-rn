@@ -8,7 +8,7 @@ export default function SignalInfo({ signal, icon }) {
         source={icon}
         style={styles.signalIcon}
       />
-      <Text style={styles.text}>36°</Text>
+      <Text style={styles.text}>{signal}</Text>
     </View>
   )
 }

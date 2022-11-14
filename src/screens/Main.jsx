@@ -14,9 +14,9 @@ export default function Main({ navigation }) {
   const { client, connect } = useMQTT();
 
 
-  React.useEffect(() => {
-    connect();
-  }, []);
+  // React.useEffect(() => {
+  //   connect();
+  // }, []);
 
   return (
     <View

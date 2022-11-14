@@ -6,7 +6,7 @@ export default function Background({ children }) {
   return (
     <ImageBackground
       source={require('../assets/todo/pantalla-inicio-fondo-1.png')}
-      resizeMode="streach"
+      // resizeMode="streach"
       style={styles.background}
     >
       <KeyboardAvoidingView style={styles.container} behavior="padding">
